@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 import pandas
 import progressbar
@@ -50,9 +51,9 @@ def most_common_text(input_file, output_folder, show_score=False, replace_arrow=
         for frame in frames:
             if not pandas.isnull(reduction[frame]):
                 if replace_arrow:
-                    data = eval(reduction[frame].replace('=>', ':'))
+                    data = json.loads(reduction[frame].replace('=>', ':'))
                 else:
-                    data = eval(reduction[frame])
+                    data = json.loads(reduction[frame])
                 lines = []
                 for l in data:
                     text_counter = [non_blank_counter(t) for t in l['clusters_text']]
